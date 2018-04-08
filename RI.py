@@ -177,6 +177,10 @@ def main():
     sess = tf.InteractiveSession()
     #input layer and output layer by creating graph
     inp, out = createGraph()
+
+    with tf.Session as sess:
+        new_saver = tf.train.import_meta_graph('pong-pqn-170000.meta')
+        new_saver.restore(sess, tf.train.latest_checkpoint('./'))
     #train our graph on input and output with session variables
     trainGraph(inp, out, sess)
 
